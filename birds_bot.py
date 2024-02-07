@@ -7,12 +7,16 @@ from aiogram.types import Message
 import dotenv
 import os
 
-import database as db
-print(db.__dir__())
-dotenv.load_dotenv()
-BOT_TOKEN = os.getenv('BOT_TOKEN')
+import config_data
 
-bot = Bot(token=BOT_TOKEN)
+import database as db
+
+
+config=config_data.load_config()
+#dotenv.load_dotenv()
+
+#BOT_TOKEN = os.getenv('BOT_TOKEN')
+bot = Bot(token=config.tg_bot.token)
 dp = Dispatcher()
 
 birds = db.load_birds('dbb')

@@ -6,7 +6,7 @@ import os
 @dataclass
 class TgBot:
     token: str
-    superadmin: int
+    admin: int
     admins: list[int] | None
 
 class Config:
@@ -16,5 +16,6 @@ class Config:
 
 def load_config(path: str | None = None) -> Config:
     dotenv.load_dotenv(path)
-    return Config()
+    return Config(tg_bot=TgBot(token=os.getenv('BOT_TOKEN'),
+                               admin=os.getenv('ADMIN_ID')))
 
