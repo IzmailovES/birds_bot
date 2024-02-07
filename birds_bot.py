@@ -4,6 +4,8 @@ from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 from aiogram.types import Message
 
+import asyncio
+import logging
 import dotenv
 import os
 
@@ -12,16 +14,10 @@ import config_data
 import database as db
 
 
-config=config_data.load_config()
-#dotenv.load_dotenv()
+logger = logging.getLogger(__name__)
 
-#BOT_TOKEN = os.getenv('BOT_TOKEN')
-bot = Bot(token=config.tg_bot.token)
+
 dp = Dispatcher()
-
-birds = db.load_birds('dbb')
-
-
 @dp.message(Command(commands=['start']))
 async def process_start_command(message:Message):
     await message.answer('Hello! This is birds bot')
@@ -47,8 +43,23 @@ async def birds_count(message:Message):
 @dp.message()
 async def default_answer(message:Message):
     #print(message.__dict__)
-    print(message.from_user.id, message.from_user.username, ':', message.text)
+    logger.info(str(message.from_user.id) + '-' + message.from_user.username +  ': ' +  message.text)
     await message.answer('default answer to non-handling message')
 
+async def main():
+    logging.basicConfig(level=logging.DEBUG,
+                        format='#%(levelname)-8s %(filename)s:%(lineno)d '
+                                '[%(asctime)s] - %(name)s - %(message)s')
+    config=config_data.load_config()
+
+    bot = Bot(token=config.tg_bot.token)
+
+    birds = db.load_birds('dbb')
+    logger.info('Starting polling')
+    await bot.delete_webhook(drop_pending_updates=True) 
+    await dp.start_polling(bot)
+
+
+
 if __name__ == '__main__':
-    dp.run_polling(bot)
+    asyncio.run(main())
