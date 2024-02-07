@@ -7,8 +7,10 @@ import os
 class TgBot:
     token: str
     admin: int
-    admins: list[int] | None
+    admins: list[int] | None = None
 
+
+@dataclass
 class Config:
     tg_bot: TgBot
 

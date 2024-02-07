@@ -46,7 +46,8 @@ async def birds_count(message:Message):
 
 @dp.message()
 async def default_answer(message:Message):
-    print(message.__dict__)
+    #print(message.__dict__)
+    print(message.from_user.id, message.from_user.username, ':', message.text)
     await message.answer('default answer to non-handling message')
 
 if __name__ == '__main__':
