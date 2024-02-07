@@ -7,15 +7,15 @@ from aiogram.types import Message
 import dotenv
 import os
 
-from database import database
-
+import database as db
+print(db.__dir__())
 dotenv.load_dotenv()
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
-birds = database.load_birds('dbb')
+birds = db.load_birds('dbb')
 
 
 @dp.message(Command(commands=['start']))
@@ -25,7 +25,7 @@ async def process_start_command(message:Message):
 
 @dp.message(Command(commands=['list']))
 async def list_of_birds(message:Message):
-    lst = map(lambda x: x['short_name'], birds)
+    lst = map(lambda x: x.short_name, birds)
     string = '\n'.join(lst)
     await message.answer(f'list of birds:\n{string}')
 

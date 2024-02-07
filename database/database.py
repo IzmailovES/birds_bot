@@ -2,6 +2,9 @@
 
 from dataclasses import dataclass
 
+
+
+
 @dataclass
 class BirdsTags:
     tag:str
@@ -19,6 +22,10 @@ class Bird:
     tags        :   list[BirdsTags] | None = None
 
 
+birds = [Bird('sparrow', 1), Bird('crown', 3)]
+
+
+
 def save_birds(filename: str, *birds: Bird):
     with open(filename + '.py', 'w') as f:
         print('birds = [', file=f)
@@ -28,12 +35,12 @@ def save_birds(filename: str, *birds: Bird):
 
 
 def load_birds(filename:str):
-    module = __import__(filename)
-    print(module.birds)
-    return module.birds
+    #module = __import__('.' +filename)
+#    import .dbb
+#    print(module.birds)
+    return birds
 
 
 if __name__ == '__main__':
-    birds = [Bird('sparrow', 1), Bird('crown', 3)]
     save_birds('dbb', *birds)
 
