@@ -12,45 +12,20 @@ import os
 import config_data
 
 import database as db
-
+from handlers import other_handlers, user_handlers
 
 logger = logging.getLogger(__name__)
 
-
-dp = Dispatcher()
-@dp.message(Command(commands=['start']))
-async def process_start_command(message:Message):
-    await message.answer('Hello! This is birds bot')
-
-
-@dp.message(Command(commands=['list']))
-async def list_of_birds(message:Message):
-    lst = map(lambda x: x.short_name, birds)
-    string = '\n'.join(lst)
-    await message.answer(f'list of birds:\n{string}')
-
-
-@dp.message(Command(commands=['list_images']))
-async def list_of_birds(message:Message):
-    await message.answer('list of birds with images')
-
-
-@dp.message(Command(commands=['count']))
-async def birds_count(message:Message):
-    await message.answer(f'count of birds  in base: {len(birds)}')
-
-
-@dp.message()
-async def default_answer(message:Message):
-    #print(message.__dict__)
-    logger.info(str(message.from_user.id) + '-' + message.from_user.username +  ': ' +  message.text)
-    await message.answer('default answer to non-handling message')
 
 async def main():
     logging.basicConfig(level=logging.DEBUG,
                         format='#%(levelname)-8s %(filename)s:%(lineno)d '
                                 '[%(asctime)s] - %(name)s - %(message)s')
     config=config_data.load_config()
+
+    dp = Dispatcher()
+    dp.include_router(user_handlers.router)
+    dp.include_router(other_handlers.router)
 
     bot = Bot(token=config.tg_bot.token)
 
