@@ -17,7 +17,7 @@ async def list_of_birds(message:Message):
 
 @router.message(Command(commands=['count']))
 async def birds_count(message:Message):
-    await message.answer(f'count birds in base: {len(birds)}')
+    await message.answer(f'only admin can watch for count')
 
 @router.message(Command(commands=['list_images']))
 async def list_images(message:Message):

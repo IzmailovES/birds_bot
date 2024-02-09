@@ -15,9 +15,9 @@ class Config:
     tg_bot: TgBot
 
 
-
 def load_config(path: str | None = None) -> Config:
     dotenv.load_dotenv(path)
     return Config(tg_bot=TgBot(token=os.getenv('BOT_TOKEN'),
-                               admin=os.getenv('ADMIN_ID')))
+                               admin=int(os.getenv('ADMIN_ID'))))
 
+global_config = load_config()
