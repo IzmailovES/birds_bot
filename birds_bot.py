@@ -10,7 +10,7 @@ import dotenv
 import os
 
 from config_data import global_config
-
+from keyboards import set_main_menu
 from handlers import admin_handlers, other_handlers, user_handlers
 
 logger = logging.getLogger(__name__)
@@ -29,6 +29,7 @@ async def main():
     dp.include_router(other_handlers.router)
 
     bot = Bot(token=global_config.tg_bot.token)
+    await set_main_menu(bot)
 
     logger.debug('Starting polling')
     await bot.delete_webhook(drop_pending_updates=True) 
