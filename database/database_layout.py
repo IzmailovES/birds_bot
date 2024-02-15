@@ -23,6 +23,13 @@ class BirdClass:
     species :   str
 
 @dataclass
+class BirdFoto:
+    id      :   int
+    url     :   str
+    descroption :   str | None = None
+
+
+@dataclass
 class Bird:
     id              : int
     name            : str
@@ -34,10 +41,10 @@ class Bird:
     aliases         : list[str] | None     = None
     dascription     : str | None    = None
 
-    foto_main       : str | None    = None
-    foto_male       : str | None    = None
-    foto_female     : str | None    = None
-    album           : str | None    = None
+    foto_main       : int | None    = None # BirdFoto.id
+    foto_male       : int | None    = None # BirdFoto.id
+    foto_female     : int | None    = None # BirdFoto.id
+    album           : list[int] | None    = None # list[BirdFoto.id]
 
     tags            : list[int] | None     = []    # list[BirdTags.id]
 
