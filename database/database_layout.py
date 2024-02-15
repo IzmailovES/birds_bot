@@ -15,17 +15,28 @@ class BirdSize:
     descr   :   str 
 
 @dataclass
+class BirdClass:
+    id      :   int
+    order   :   str
+    family  :   str
+    genus   :   str
+    species :   str
+
+@dataclass
 class Bird:
     id              : int
     name            : str
     size            : int   # BirdSize.id
-
+    
+    sc_class        : int | None    = None # BirdClass.id
     latin_name      : str | None    = None
     english_name    : str | None    = None
     aliases         : list[str] | None     = None
     dascription     : str | None    = None
 
-    main_foto       : str | None    = None
+    foto_main       : str | None    = None
+    foto_male       : str | None    = None
+    foto_female     : str | None    = None
     album           : str | None    = None
 
     tags            : list[int] | None     = []    # list[BirdTags.id]
@@ -52,5 +63,7 @@ bird_sizes = [
         ]
 
 birds = [
+
+
         ]
 
