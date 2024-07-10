@@ -32,7 +32,7 @@ class BirdFoto:
 @dataclass
 class Bird:
     id              : int
-    name            : str
+    short_name      : str
     size            : int   # BirdSize.id
     
     sc_class        : int | None    = None # BirdClass.id
@@ -46,7 +46,7 @@ class Bird:
     foto_female     : int | None    = None # BirdFoto.id
     album           : list[int] | None    = None # list[BirdFoto.id]
 
-    tags            : list[int] | None     = []    # list[BirdTags.id]
+    tags            : list[int] | None     = None   # list[BirdTags.id]
 
 
 ### next database hardcode!!!!
@@ -63,14 +63,12 @@ bird_tags = [
         ]
 
 bird_sizes = [
-        BirdSize(0, 'bullfinch', 'small then bullfinch'),
-        BirdSize(1, 'jay', 'small then jay'),
-        BirdSize(2, 'crow', 'small then a big crown'),
-        BirdSize(3, 'heron', 'big bird'),
+        BirdSize(0, 'bullfinch', 'small then bullfinch'),   # снегирь
+        BirdSize(1, 'jay', 'small then jay'),               # сойка
+        BirdSize(2, 'raven', 'small then a raven'),         # ворон
+        BirdSize(3, 'heron', 'big bird'),                   # цапля
         ]
 
-birds = [
-
-
-        ]
+birds = [Bird(1, 'sparrow', 0),
+         Bird(2, 'crow', 2)]
 

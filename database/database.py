@@ -2,11 +2,9 @@
 
 from dataclasses import dataclass
 
-import .database_layout
+from .database_layout import *
 
-
-
-birds = database_layout.birds 
+birds = birds
 
 
 
